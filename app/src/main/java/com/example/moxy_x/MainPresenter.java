@@ -1,11 +1,12 @@
 package com.example.moxy_x;
 
-import com.arellomobile.mvp.MvpPresenter;
+import moxy.InjectViewState;
+import moxy.MvpPresenter;
 
+@InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
 
     private Model model = new Model();
-
 
     @Override
     protected void onFirstViewAttach() {
@@ -19,14 +20,14 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     public void counterClick(int id){
         switch (id) {
-            case R.id.btnCounter1:
-                getViewState().setButtonText(0, calcValue(0));
+            case 0:
+                getViewState().setText0(calcValue(0));
                 break;
-            case R.id.btnCounter2:
-                getViewState().setButtonText(1, calcValue(1));
+            case 1:
+                getViewState().setText1(calcValue(1));
                 break;
-            case R.id.btnCounter3:
-                getViewState().setButtonText(2, calcValue(2));
+            case 2:
+                getViewState().setText2(calcValue(2));
                 break;
         }
     }

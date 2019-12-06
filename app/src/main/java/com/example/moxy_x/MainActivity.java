@@ -3,12 +3,11 @@ package com.example.moxy_x;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView {
 
@@ -33,21 +32,33 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @OnClick({R.id.btnCounter1, R.id.btnCounter2, R.id.btnCounter3})
     public void onButtonClick(Button button) {
-        presenter.counterClick(button.getId());
+        int index = 0;
+        switch (button.getId()) {
+            case R.id.btnCounter1:
+                index = 0;
+                break;
+            case R.id.btnCounter2:
+                index = 1;
+                break;
+            case R.id.btnCounter3:
+                index = 2;
+                break;
+        }
+        presenter.counterClick(index);
     }
 
     @Override
-    public void setButtonText(int index, int value) {
-        switch (index) {
-            case 0:
-                buttonOne.setText(String.format(getString(R.string.count_format), value));
-                break;
-            case 1:
-                buttonTwo.setText(String.format(getString(R.string.count_format), value));
-                break;
-            case 2:
-                buttonThree.setText(String.format(getString(R.string.count_format), value));
-                break;
-        }
+    public void setText0(int value) {
+        buttonOne.setText(String.format(getString(R.string.count_format), value));
+    }
+
+    @Override
+    public void setText1(int value) {
+        buttonTwo.setText(String.format(getString(R.string.count_format), value));
+    }
+
+    @Override
+    public void setText2(int value) {
+        buttonThree.setText(String.format(getString(R.string.count_format), value));
     }
 }
